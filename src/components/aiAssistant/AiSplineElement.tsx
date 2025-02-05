@@ -1,15 +1,19 @@
 import Spline from '@splinetool/react-spline';
 import { useEffect, useState, useRef } from 'react';
 
+interface AiSplineElementProps {
+  listening: boolean;
+  startListening: () => void;
+  circleSize: number;
+  assistantSpeaking: boolean;
+}
+
 const AiSplineElement = ({
   listening,
   startListening,
   circleSize,
-}: {
-  listening: boolean;
-  startListening: () => void;
-  circleSize: number;
-}) => {
+  assistantSpeaking,
+}: AiSplineElementProps) => {
   const startEndScale = 0.6666;
   const onStartScale = 0.8333;
   const maxScale = 1;
@@ -64,8 +68,11 @@ const AiSplineElement = ({
           scene="https://prod.spline.design/moDxSU2YolLqofps/scene.splinecode"
         />
       </div>
+      {/* Ripple Element: When assistantSpeaking is true, the CSS classes show the ripple */}
       <div
-        className={`absolute inset-0 bg-white opacity-0 transition-opacity duration-300 ease-out rounded-full`}
+        className={`absolute inset-0 rounded-full transition-opacity duration-300 ease-out ${
+          assistantSpeaking ? 'opacity-100 animate-ripple' : 'opacity-0'
+        }`}
       ></div>
     </div>
   );
