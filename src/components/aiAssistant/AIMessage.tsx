@@ -6,8 +6,6 @@ const AiMessage: React.FC<{ listening: boolean; AIMessage: string }> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  console.log(listening);
-
   useEffect(() => {
     if (listening) {
       setIsVisible(false);

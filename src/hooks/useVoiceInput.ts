@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-const useVoiceInput = () => {
+const useVoiceInput = (assistantSpeaking: boolean, callStatus: string) => {
   const [listening, setListening] = useState(false);
   const [recognizedText, setRecognizedText] = useState('');
   const recognitionRef = useRef<SpeechRecognition | null>(null);
@@ -15,7 +15,7 @@ const useVoiceInput = () => {
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognitionAPI) {
-      alert(`Your browser does not support voice input  😞`);
+      alert(`Your browser does not support voice input 😞`);
       return;
     }
 
@@ -45,6 +45,13 @@ const useVoiceInput = () => {
       recognitionRef.current.stop();
     }
   };
+
+  useEffect(() => {
+    if (!assistantSpeaking && callStatus === 'active' && !listening) {
+      startListening();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [assistantSpeaking, callStatus, listening]);
 
   return { listening, recognizedText, startListening, stopListening };
 };
