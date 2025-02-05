@@ -20,8 +20,8 @@ const AiMessage: React.FC<{ listening: boolean; AIMessage: string }> = ({
     >
       <div className={` bg-red text-white py-2 px-4 `}>{AIMessage}</div>
       <div
-        className="w-0 h-0 border-l-8 border-red border-l-transparent 
-      border-r-8 border-r-transparent border-t-16 border-t-red-500 transform"
+        className="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent 
+             border-t-16 border-t-red border-solid transform"
       ></div>
     </div>
   );
